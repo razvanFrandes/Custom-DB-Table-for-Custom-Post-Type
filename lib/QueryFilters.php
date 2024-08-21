@@ -38,8 +38,9 @@ class QueryFilters
     public function updateQueryTables(string $query) : string
     {
         $table = $this->determineTable($query);
+        $updateQueryTable = apply_filters('ctp_tables:update_query_table', true);
 
-        if ($table && in_array($table, $this->config['post_types'])) {
+        if ($table && $updateQueryTable && in_array($table, $this->config['post_types'])) {
             $table = str_replace('-', '_', $table);
 
             $query = str_replace($this->config['default_post_table'], $table, $query);
